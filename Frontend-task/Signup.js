@@ -79,11 +79,7 @@ class Signup extends Component {
             this.setState({error4 :false});
         }        
       }
-      handleSignup(fname,lname,user,pass){
-
-if (fname===''&&lname===''&&user===''&&pass==='') {
-    alert("fields empty")
-}else{
+      handleSignup(){
 this.setState({signup:true})
 }
       }
@@ -116,7 +112,7 @@ this.setState({signup:true})
           <Input type="password" placeholder='password' value={pass} onChange={this.onChange4}/>
           {this.state.error4 === true && (
                     <div className="error">*field required</div>)}</div><br/>
-          <Button onClick={this.handleSignup(fname,lname,user,pass)}>Signup</Button>
+          <Button onClick={this.handleSignup}>Signup</Button>
           </div>
 <br/>
           {this.state.signup?(
