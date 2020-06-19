@@ -1,54 +1,67 @@
 import React, { Component } from 'react';
 import {
-    //Form,
+    Form,
+    FormGroup,
     Input,
     Button,
     Label
 } from 'reactstrap';
-import './style.css';
+import './styles.css';
 class Login extends Component {
     constructor()
     {
       super()
       this.state={
-        email:'',
-        password:''
+          error1:'',
+          error2:''
       }
-      this.onChange=this.onChange.bind(this)
+      this.onChange1=this.onChange1.bind(this)
+      this.onChange2=this.onChange2.bind(this)
     }
-    onChange = e => {
+    onChange1 = e => {
         const { value } = e.target;
         if (value.length === 0)
         {
-          this.setState({error :true});
+          this.setState({error1 :true});
         }
         else
-        {
-            this.setState({error :false});
+        {this.setState({error1 :false});
         }        
       }
-    
-    
-    render()
+      onChange2 = e => {
+        const { value } = e.target;
+        if (value.length === 0)
+        {
+          this.setState({error2 :true});
+        }
+        else
+        {this.setState({error2 :false});
+        }        
+      }
+    submit(name,pass)
     {
-        const {error}=this.state
+if(name==='' &&pass ==='' ){
+alert("fields empty")}
+else{
+    alert(" Successfully logged in")
+}
+    }
+    render()
+    {const { name,pass } = this.state;
         return(
-       <div className="center">
-                 <div>  
+       <Form className="center">
+                 <FormGroup>  
           <Label>UserName</Label><br/>
-          <Input type="text" placeholder='UserName'/>
-          {error === true && (
-                    <div className="error">*name field required</div>)}</div><br/>
-          <div>
+          <Input type="text" placeholder='UserName' value={name} onChange={this.onChange1}/>
+          {this.state.error1 === true && (
+                    <div className="error">*field required</div>)}</FormGroup><br/>
+          <FormGroup>
           <Label>Password</Label><br/>
-          <Input type="password" placeholder='password'/>
-          {error === true && (
-                    <div className="error">*field required</div>)}</div><br/>
-          <div>
-          <Button>Login</Button>
-          {error === true && (
-                    <div className="error">*field required</div>)}</div>
-           </div>
+          <Input type="password" placeholder='password' value={pass} onChange={this.onChange2}/>
+          {this.state.error2 === true && (
+                    <div className="error">*field required</div>)}</FormGroup><br/>
+          <Button onClick={this.submit(name,pass)}>Login</Button>
+           </Form>
         )
     }
 }
